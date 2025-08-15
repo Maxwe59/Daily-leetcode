@@ -138,7 +138,22 @@ class Solutions:
 
         return result
 
+    def getXORSum(self, arr1: List[int], arr2: List[int]) -> int:
+        res = arr2[0]
+        res_arr = []
+        for i in range(1, len(arr2)):
+            res = res ^ arr2[i]
 
+        for item in arr1:
+            res_arr.append(item & res)
+        
+        
+        
+        final = res_arr[0]
+        for i in range(1, len(res_arr)):
+            final = (final ^ res_arr[i])
+            
+        return final
 
 
 test = Solutions()
