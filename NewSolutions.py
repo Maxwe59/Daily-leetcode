@@ -107,6 +107,38 @@ class Solutions:
                 return False
         
         return True
+    
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        r_set = set()
+
+        while len(nums) > 1: #fix later
+            current = nums[0]
+            left = 1
+            right = len(nums) -1
+            while left < right: #fix later
+                total = nums[right] + nums[left] + current
+
+                if total == 0:
+                    arr = (current, nums[left], nums[right])
+                    r_set.add(arr)
+                    right -= 1
+                    left += 1
+                
+                elif total > 0:
+                    right -= 1
+                elif total <0:
+                    left += 1
+                
+            nums.pop(0)
+
+        result = []
+        for item in r_set:
+            result.append(list(item))
+
+        return result
+
+
 
 
 test = Solutions()
