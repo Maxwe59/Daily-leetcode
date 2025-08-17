@@ -154,6 +154,35 @@ class Solutions:
             final = (final ^ res_arr[i])
             
         return final
+    
+
+    def trap(self, height: List[int]) -> int:
+        output = 0
+
+        high_index = 0
+        current_dip =0
+        for index,block in enumerate(height):
+            if block >= height[high_index]:
+                output += current_dip
+                current_dip = 0
+                high_index = index
+            
+            elif block < height[high_index]:
+                current_dip += (height[high_index] - block)
+
+        high_index = len(height) - 1
+        current_dip = 0
+        for index in reversed(range(len(height))):
+            if height[index] > height[high_index]:
+                output += current_dip
+                current_dip = 0
+                high_index = index
+
+            elif height[index] < height[high_index]:
+                current_dip += (height[high_index]- height[index])
+                
+
+        return output
 
 
 test = Solutions()
