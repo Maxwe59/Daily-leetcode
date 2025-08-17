@@ -184,5 +184,28 @@ class Solutions:
 
         return output
 
+    def isValid(self, s: str) -> bool:
+        mapping = {"{":"}", "[":"]", "(":")"}
+        stack = []
+        if len(s)%2 != 0:
+            return False
+            
+        for char in s:  
+            if char in mapping.keys(): #if there is a left mapping
+                stack.append(char)
+            
+            elif char in mapping.values(): #if there is a right mapping
+                if len(stack) == 0:
+                    return False
+                top = stack[len(stack) - 1]
+                if mapping[top] != char:
+                    return False
+                elif mapping[top] == char:
+                    stack.pop(len(stack) - 1)
+
+        if len(stack) != 0:
+            return False
+
+        return True
 
 test = Solutions()
