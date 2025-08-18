@@ -208,4 +208,18 @@ class Solutions:
 
         return True
 
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        operators = set(["+", "-", "*", "/"])
+        for token in tokens:
+            if token not in operators: #integer
+                stack.append(token)
+            
+            elif token in operators:
+                num1,num2 = stack.pop(), stack.pop()
+                calc = int(eval(f"{num2}{token}{num1}"))
+                stack.append(calc)
+
+        return int(stack[0])
+
 test = Solutions()
