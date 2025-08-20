@@ -222,4 +222,27 @@ class Solutions:
 
         return int(stack[0])
 
+
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        left_arr = [1] * len(nums)
+        right_arr = [1] * len(nums)
+
+        result = []
+
+        total = nums[0]
+        for i in range(1, len(nums)):
+            left_arr[i] *= total
+            total *= nums[i]   
+            
+        total = nums[-1]
+        for i in reversed(range(0, len(nums)-1)):
+            right_arr[i] *= total
+            total *= nums[i]
+        
+        
+        for i in range(len(nums)):
+            result.append(left_arr[i] * right_arr[i])
+            
+        return result
+
 test = Solutions()
