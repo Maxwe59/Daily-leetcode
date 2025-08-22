@@ -245,4 +245,41 @@ class Solutions:
             
         return result
 
+
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        left = 0
+        right = len(matrix) - 1
+        predicted_arr = None
+        while left <= right:
+            mid = (left + right)//2
+
+            if matrix[mid][0] <= target <= matrix[mid][-1]:
+                predicted_arr = mid
+                break
+            
+            elif matrix[mid][-1] < target:
+                left = mid + 1
+            
+            elif matrix[mid][0] > target:
+                right = mid - 1
+
+        if predicted_arr == None:
+            return False
+
+        left = 0
+        right = len(matrix[predicted_arr]) - 1
+        while left <= right:
+            mid = (left + right) //2
+
+            if matrix[predicted_arr][mid] == target:
+                return True
+
+            elif matrix[predicted_arr][mid] > target:
+                right = mid - 1
+            elif matrix[predicted_arr][mid] < target:
+                left = mid + 1
+        
+        return False
+
+
 test = Solutions()
