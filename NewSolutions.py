@@ -280,6 +280,18 @@ class Solutions:
                 left = mid + 1
         
         return False
+    
+    def climbStairs(self, n: int) -> int:
+        if n <= 3:
+            return n
+        
+        arr = [0] * n
+        arr[0], arr[1] =  1,1
+
+        for n in range(2, len(arr)):
+            arr[n] = arr[n-1] + arr[n-2]
+
+        return arr[n-1] + arr[n]
 
 
 test = Solutions()
