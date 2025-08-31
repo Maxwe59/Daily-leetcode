@@ -293,5 +293,24 @@ class Solutions:
 
         return arr[n-1] + arr[n]
 
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = set()
+        res_arr = []    
+        def backtrack(arr):
+            if len(arr) == 0 or arr in res:
+                return
+            
+            res.add(arr[:])
+            for i in range(len(arr)):
+                new_arr = arr[:i] + arr[i+1:]
+                backtrack(new_arr)
+        
+        backtrack(tuple(nums[:]))
+        
+        for item in res:
+            res_arr.append(list(item))
+        res_arr.append([])
+        return res_arr
+
 
 test = Solutions()
