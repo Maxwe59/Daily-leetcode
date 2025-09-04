@@ -323,4 +323,26 @@ class Solutions:
         
         return res
 
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        res = 0
+        hash_ = {}
+        if len(s) == 1 or len(s) == 0:
+            return len(s)
+
+        for i in range(len(s)):
+            if not s[i] in hash_:
+                hash_[s[i]] = i
+                res = max(res, len(hash_))
+            
+            else:
+                res = max(res, len(hash_))
+                delete_to = hash_[s[i]]
+                hash_[s[i]] = i
+                new_hash = {}
+                for item in hash_:
+                    if not hash_[item] <= delete_to:
+                        new_hash[item] = hash_[item]
+                hash_ = new_hash
+        return res
+
 test = Solutions()
