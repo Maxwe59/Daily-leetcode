@@ -345,4 +345,25 @@ class Solutions:
                 hash_ = new_hash
         return res
 
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        sorted_positions = sorted(position, reverse=True) #nlogn
+        hash_speed = {}
+        for index,item in enumerate(position): #n
+            hash_speed[item] = speed[index]
+
+        hours_to_target = []
+        for item in sorted_positions: #n
+            hours = (target - item) / hash_speed[item]
+            hours_to_target.append(hours)
+
+        car_fleet_count = 1
+        head_fleet_time = hours_to_target[0]
+        for i in range(1, len(hours_to_target)):
+            if hours_to_target[i] > head_fleet_time:
+                car_fleet_count += 1
+                head_fleet_time = hours_to_target[i]
+        
+        return car_fleet_count
+        #O(nlogn) solution
+
 test = Solutions()
